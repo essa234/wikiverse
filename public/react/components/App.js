@@ -17,16 +17,20 @@ export const App = () => {
 			console.log("Oh no an error! ", err)
 		}
 	}
+	
 
 	useEffect(() => {
 		fetchPages();
 	}, []);
 
+
+
+	
 	return (
 		<main>	
       <h1>WikiVerse</h1>
 			<h2>An interesting 📚</h2>
-			<PagesList pages={pages} />
+			<PagesList pages={pages} setPages={setPages}/>
 		</main>
 	)
 }
