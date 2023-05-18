@@ -21,9 +21,10 @@ export const PagesList = ({pages, setPages}) => {
 	return <>
 		{
 			pages.map((page, idx) => {
-				//render page and button to view article
+				//render page and button to view article then render component
 				return <>
 				<Page page={page} key={idx} />
+
 				<button onClick={() => viewArticle(page.slug)}>View Article</button>
 				<Article article = {articleData} />
 				</>
