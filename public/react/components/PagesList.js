@@ -11,9 +11,15 @@ export const PagesList = ({ pages, setPages }) => {
       const articleData = await response.json()
       setPages([])
       setArticleData(articleData)
+      console.log(articleData)
+      return <Article article={articleData} />
     } catch (err) {
       console.log('Oh no an error! ', err)
     }
+  }
+
+  async function AddPage(){
+
   }
 
   return (
@@ -25,10 +31,11 @@ export const PagesList = ({ pages, setPages }) => {
             <Page page={page} />
 
             <button onClick={() => viewArticle(page.slug)}>View Article</button>
-            <Article article={articleData} />
           </div>
         )
       })}
+
+      <button onClick={() => AddPage()}>Add a page</button>
     </>
   )
 }
