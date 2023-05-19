@@ -3,22 +3,44 @@ import { Page } from './Page'
 import apiURL from '../api'
 import { Article } from './Article'
 export const PagesList = ({ pages, setPages }) => {
-  const [articleData, setArticleData] = useState('')
+  const [articleData, setArticleData] = useState('');
+  const [isViewingArticle, setisViewingArticle] = useState(false);
+  
+
 
   async function viewArticle(slug) {
     try {
+      setisViewingArticle(true)
       const response = await fetch(`${apiURL}/wiki/${slug}`)
       const articleData = await response.json()
       setPages([])
       setArticleData(articleData)
-      console.log('Pages List', articleData)
+      //console.log('Pages List', articleData)
       return <Article article={articleData} />
     } catch (err) {
       console.log('Oh no an error!', err)
     }
   }
 
-  async function AddPage() {}
+
+  async function deletePage(slug) {
+    const response = await fetch(`${apiURL}/wiki/${slug}`, {
+      method: "DELETE"
+    });
+
+    const data = await response.json;
+
+  }
+
+  async function fetchPages() {
+    try {
+      const response = await fetch(`${apiURL}/wiki`)
+      const pagesData = await response.json()
+      setPages(pagesData)
+    } catch (err) {
+      console.log('Oh no an error! ', err)
+    }
+  }
 
   return (
     <>
@@ -33,9 +55,13 @@ export const PagesList = ({ pages, setPages }) => {
         )
       })}
 
-      <button onClick={() => AddPage()}>Add a page</button>
+      
 
-      <Article article={articleData} />
+      {isViewingArticle && <Article article={articleData} setPages={setPages} fetchPages={fetchPages} 
+      deletePage={deletePage} setisViewingArticle = {setisViewingArticle} />}
+    
+      
+    
     </>
   )
 }
