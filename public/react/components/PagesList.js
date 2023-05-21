@@ -5,7 +5,6 @@ import { Article } from './Article'
 export const PagesList = ({ pages, setPages }) => {
   const [articleData, setArticleData] = useState('');
   const [isViewingArticle, setisViewingArticle] = useState(false);
-  
 
 
   async function viewArticle(slug) {
@@ -24,12 +23,15 @@ export const PagesList = ({ pages, setPages }) => {
 
 
   async function deletePage(slug) {
+    console.log("delete")
     const response = await fetch(`${apiURL}/wiki/${slug}`, {
       method: "DELETE"
     });
 
-    const data = await response.json;
-
+    const data = await response.json();
+    //setPages(data);
+    console.log(JSON.stringify(data))
+    fetchPages()
   }
 
   async function fetchPages() {
@@ -58,7 +60,7 @@ export const PagesList = ({ pages, setPages }) => {
       
 
       {isViewingArticle && <Article article={articleData} setPages={setPages} fetchPages={fetchPages} 
-      deletePage={deletePage} setisViewingArticle = {setisViewingArticle} />}
+      deletePage={deletePage} setisViewingArticle = {setisViewingArticle} slug={articleData.slug}/>}
     
       
     

@@ -88,17 +88,20 @@ router.put("/:slug", async (req, res, next) => {
 
 // DELETE /wiki/:slug
 router.delete("/:slug", async (req, res, next) => {
+  console.log("h")
   try {
     await Page.destroy({
       where: {
         slug: req.params.slug
       }
     });
-
+    console.log("slug")
     const pages = await Page.findAll();
     res.send(pages);
   } catch (error) {
+    console.log(JSON.stringify(error))
     next(error);
+    
   }
 });
 

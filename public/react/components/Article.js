@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import { App } from './App'
 
 //setPages={setPages} fetchPages={fetchPages} deletePage={deletePage}
-export const Article = ({ article, setPages, fetchPages, deletePage, setisViewingArticle }) => {
+export const Article = ({ article, setPages, fetchPages, deletePage, setisViewingArticle, slug }) => {
   //<h3>{article.authorId}</h3> need to get author name by author id
   console.log('Article', article)
   
@@ -26,7 +26,7 @@ export const Article = ({ article, setPages, fetchPages, deletePage, setisViewin
           setisViewingArticle(false)
           fetchPages()
           }}>View Article List</button>}
-        {article && <button onClick={() => deletePage()}>Delete Page</button>}
+        {article && <button onClick={() => deletePage(slug)}>Delete Page</button>}
 
       
       </>
